@@ -1,0 +1,2 @@
+# Set default page to index.php first, then dashboard.html and index.html
+DirectoryIndex index.php dashboard.html index.html

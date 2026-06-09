@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SD 1 Air Abang - Sekolah Unggulan</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+/* === VARIABLES === */
+:root {
+  --primary: #064e3b;
+  --primary-light: #047857;
+  --accent: #16a34a;
+  --accent-hover: #22c55e;
+  --text: #134e4a;
+  --text-light: #4d7c63;
+  --bg: #ecfdf5;
+  --white: #ffffff;
+  --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.12);
+  --radius: 14px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { color: var(--primary); line-height: 1.2; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.section-padding { padding: 80px 0; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  gap: 8px;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--white);
+  box-shadow: 0 4px 6px rgba(22, 163, 74, 0.24);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--white);
+  color: var(--white);
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  top: 0; width: 100%;
+  z-index: 1000;
+  background: linear-gradient(180deg, rgba(4, 74, 43, 0.92), rgba(16, 185, 129, 0.65)),
+              url('https://images.unsplash.com/photo-1524408247702-4b2bb316b0c8?auto=format&fit=crop&w=1400&q=80') center/cover;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  padding: 18px 0;
+  transition: all 0.3s ease;
+}
+header.scrolled { padding: 8px 0; }
+.navbar { display: flex; justify-content: space-between; align-items: center; }
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo i { color: var(--accent); font-size: 1.8rem; }
+.logo span { color: rgba(255,255,255,0.85); }
+
+.nav-menu { display: flex; gap: 25px; align-items: center; }
+.nav-link { font-weight: 500; color: var(--white); }
+.nav-link:hover { color: rgba(255,255,255,0.95); }
+.mobile-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--white); }
+
+/* HERO */
+.hero {
+  height: 100vh;
+  background: linear-gradient(rgba(4, 74, 43, 0.85), rgba(16, 185, 129, 0.65)),
+              url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1920&q=80') center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--white);
+}
+.hero h1 { font-size: 3.5rem; margin-bottom: 20px; color: var(--white); }
+.hero p { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; max-width: 600px; margin: 0 auto 30px; }
+
+/* STATS */
+.stats { background: linear-gradient(135deg, rgba(6, 95, 70, 0.95), rgba(16, 185, 129, 0.92)); padding: 60px 0; color: var(--white); }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center; }
+.stat-item i { font-size: 2.5rem; color: rgba(255,255,255,0.9); margin-bottom: 15px; }
+.stat-item h3 { color: var(--white); font-size: 2.2rem; margin-bottom: 5px; }
+.stat-item img { width: 100%; border-radius: var(--radius); margin-bottom: 15px; }
+.stat-item.stat-library h3 { margin-top: 0; font-size: 1.6rem; }
+.stat-item.stat-library p { color: rgba(255,255,255,0.95); font-size: 0.95rem; line-height: 1.6; }
+
+/* ABOUT */
+.about { background: var(--white); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.about-img-wrapper { position: relative; }
+.about-img-wrapper img { border-radius: var(--radius); box-shadow: var(--shadow); }
+.about-img-wrapper::before {
+  content: ''; position: absolute; top: -20px; left: -20px;
+  width: 100%; height: 100%; border: 3px solid var(--accent);
+  border-radius: var(--radius); z-index: -1;
+}
+.check-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-weight: 500; }
+.check-list i { color: var(--accent); }
+
+/* SECTIONS */
+.section-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 10px; text-align: center; }
+.section-subtitle { text-align: center; color: var(--text-light); margin-bottom: 50px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.bg-light { background: #f1f5f9; }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: all 0.3s ease; }
+.card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+.card-img { height: 200px; background-size: cover; background-position: center; }
+.card-body { padding: 25px; }
+.card-date { font-size: 0.85rem; color: var(--accent); font-weight: 600; margin-bottom: 5px; display: block; }
+.card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+.card p { font-size: 0.9rem; color: var(--text-light); }
+
+/* TEAM */
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+.team-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+.team-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+.team-card .card-body {
+  padding: 24px;
+}
+.team-card h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--primary); }
+.team-card p { margin: 0; color: var(--text-light); line-height: 1.7; }
+
+/* GALERI */
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.gallery-item { height: 250px; border-radius: var(--radius); overflow: hidden; cursor: pointer; position: relative; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.gallery-item:hover img { transform: scale(1.1); }
+.gallery-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: 0.3s;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay i { color: var(--white); font-size: 2rem; }
+
+/* FASILITAS */
+.facility-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+.facility-item {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.facility-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+.facility-content {
+  padding: 24px;
+}
+.facility-content h3 { font-size: 1.4rem; margin: 0 0 10px; color: var(--primary); }
+.facility-content p { margin: 0; color: var(--text-light); line-height: 1.7; }
+
+/* FORMS */
+.form-box { background: var(--white); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow); max-width: 600px; margin: 0 auto; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+.form-control {
+  width: 100%; padding: 12px 15px; border: 1px solid #cbd5e1;
+  border-radius: 8px; font-family: inherit; font-size: 1rem;
+  transition: 0.3s;
+}
+.form-control:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(245,158,11,0.1); }
+textarea.form-control { resize: vertical; }
+
+/* KONTAK */
+.contact-section { background: var(--primary); color: var(--white); padding: 80px 0; }
+.contact-section .section-title { color: var(--white); }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 40px; }
+.contact-item { display: flex; gap: 20px; align-items: flex-start; }
+.contact-item i { font-size: 1.5rem; color: var(--accent); margin-top: 5px; }
+.contact-item p { opacity: 0.9; }
+.map-box { width: 100%; height: 300px; background: #cbd5e1; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--primary); font-weight: 600; }
+
+/* FOOTER */
+footer { background: var(--primary); color: var(--white); padding: 40px 0; text-align: center; }
+footer p { opacity: 0.8; font-size: 0.9rem; }
+
+/* MODAL */
+.modal {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7); z-index: 2000; align-items: center; justify-content: center;
+}
+.modal.active { display: flex; }
+.modal-content { background: var(--white); padding: 30px; border-radius: var(--radius); max-width: 500px; width: 90%; position: relative; }
+.close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: var(--text-light); }
+
+/* ADMIN PANEL */
+.admin-panel { display: none; background: #f0f9ff; padding: 40px 0; }
+.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.admin-card { background: var(--white); padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 20px; }
+.data-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+.data-table th, .data-table td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+.data-table th { background: #f8fafc; font-weight: 600; }
+.data-scroll { max-height: 300px; overflow-y: auto; }
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+  .hero h1 { font-size: 2.2rem; }
+  .about-grid { grid-template-columns: 1fr; }
+  .nav-menu { position: fixed; top: 70px; left: -100%; width: 100%; background: var(--white); flex-direction: column; padding: 20px; transition: 0.3s; box-shadow: var(--shadow); gap: 15px; }
+  .nav-menu.show { left: 0; }
+  .mobile-toggle { display: block; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="container navbar">
+    <a href="#beranda" class="logo"><i class="fas fa-school"></i> SD 1 <span>Air Abang</span></a>
+    <div class="mobile-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+    <nav class="nav-menu" id="navMenu">
+      <a href="#beranda" class="nav-link">Beranda</a>
+      <a href="#tentang" class="nav-link">Tentang</a>
+      <a href="#berita" class="nav-link">Berita</a>
+      <a href="#galeri" class="nav-link">Galeri</a>
+      <a href="#pendaftaran" class="nav-link">Pendaftaran</a>
+      <a href="#kontak" class="nav-link">Kontak</a>
+      <button class="btn btn-primary" id="btnLoginHeader" style="padding:8px 20px; font-size:0.9rem;">Login</button>
+    </nav>
+  </div>
+</header>
+
+<!-- MODAL LOGIN -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeLoginModal">&times;</span>
+    <h2 class="text-center" style="margin-bottom:20px;">Login Admin</h2>
+    <form id="formLogin">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="username" class="form-control" placeholder="admin" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password" class="form-control" placeholder="1234" required>
+      </div>
+      <p id="loginMsg" style="color:red; text-align:center; margin-bottom:10px;"></p>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Masuk</button>
+    </form>
+  </div>
+</div>
+
+<main style="margin-top:80px;">
+
+<!-- HERO -->
+<section class="hero" id="beranda">
+  <div class="container">
+    <h1>Mewujudkan Generasi Cerdas & Berkarakter</h1>
+    <p>Selamat datang di SD 1 Air Abang, sekolah terbaik dengan pendidikan berkualitas dan fasilitas lengkap.</p>
+    <a href="#pendaftaran" class="btn btn-primary"> Daftar Sekarang</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item"><i class="fas fa-user-graduate"></i><h3 id="statSiswa">250</h3><p>Siswa Aktif</p></div>
+      <div class="stat-item"><i class="fas fa-chalkboard-teacher"></i><h3 id="statGuru">20</h3><p>Guru Profesional</p></div>
+      <div class="stat-item"><i class="fas fa-trophy"></i><h3>15</h3><p>Penghargaan</p></div>
+      <div class="stat-item"><i class="fas fa-book-open"></i><h3>12</h3><p>Program Ekstra</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TENTANG -->
+<section class="section-padding about" id="tentang">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrapper">
+        <img src="https://images.unsplash.com/photo-1580582932707-520aed75769d?auto=format&fit=crop&w=800&q=80" alt="Sekolah">
+      </div>
+      <div>
+        <h2 class="section-title text-left">Tentang SD 1 Air Abang</h2>
+        <p style="color:var(--text-light); margin-bottom:20px;">Kami adalah institusi pendidikan yang berkomitmen tinggi dalam membentuk karakter dan intelektualitas siswa sejak tahun 1995.</p>
+        <ul class="check-list">
+          <li><i class="fas fa-check-circle"></i> Kurikulum Terbaru & Komprehensif</li>
+          <li><i class="fas fa-check-circle"></i> Guru Bersertifikat Profesional</li>
+          <li><i class="fas fa-check-circle"></i> Fasilitas Laboratorium & Olahraga</li>
+          <li><i class="fas fa-check-circle"></i> Lingkungan Aman & Nyaman</li>
+        </ul>
+        <a href="#kontak" class="btn btn-primary" style="margin-top:20px;">Hubungi Kami</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BERITA -->
+<section class="section-padding" id="berita">
+  <div class="container">
+    <h2 class="section-title">Berita Terbaru</h2>
+    <p class="section-subtitle">Informasi terbaru tentang kegiatan dan prestasi sekolah.</p>
+    <div class="card-grid" id="beritaContainer"></div>
+  </div>
+</section>
+
+<!-- GALERI -->
+<section class="section-padding bg-light" id="galeri">
+  <div class="container">
+    <h2 class="section-title">Galeri Foto</h2>
+    <p class="section-subtitle">Sekilas momen kegiatan siswa dan fasilitas sekolah.</p>
+    <div class="gallery-grid" id="galeriContainer"></div>
+  </div>
+</section>
+
+<!-- KELOMPOK PENDIDIK -->
+<section class="section-padding" id="team">
+  <div class="container">
+    <h2 class="section-title">Kepala Sekolah & Guru</h2>
+    <p class="section-subtitle">Tim pendidik profesional yang selalu mendukung proses belajar siswa di SD 1 Air Abang.</p>
+    <div class="team-grid" id="guruContainer">
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="Kepala Sekolah">
+        <div class="card-body">
+          <h3>Drs. Ahmad Fauzi, M.Pd.</h3>
+          <p>Kepala Sekolah yang berdedikasi tinggi dengan visi pembelajaran inklusif dan karakter siswa.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Guru Matematika">
+        <div class="card-body">
+          <h3>Ibu Siti Aminah</h3>
+          <p>Guru Matematika yang kreatif dan berpengalaman, selalu membuat pelajaran menjadi menyenangkan.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80" alt="Guru Bahasa">
+        <div class="card-body">
+          <h3>Bapak Rudi Hartono</h3>
+          <p>Guru Bahasa Indonesia yang mendukung literasi siswa dengan metode pengajaran interaktif.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80" alt="Guru IPA">
+        <div class="card-body">
+          <h3>Ibu Dewi Lestari</h3>
+          <p>Guru IPA yang inspiratif, membimbing siswa dalam eksplorasi sains dan eksperimen praktis.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASILITAS -->
+<section class="section-padding bg-light" id="fasilitas">
+  <div class="container">
+    <h2 class="section-title">Fasilitas Sekolah</h2>
+    <p class="section-subtitle">
+      Fasilitas unggulan untuk mendukung kegiatan belajar mengajar siswa.
+    </p>
+
+    <div class="facility-grid" id="fasilitasContainer">
+
+    </div>
+
+  </div>
+</section>
+
+<!-- PENDAFTARAN -->
+<section class="section-padding bg-light" id="pendaftaran">
+  <div class="container">
+    <h2 class="section-title">Pendaftaran Siswa Baru</h2>
+    <p class="section-subtitle">Isi formulir di bawah untuk melakukan pendaftaran.</p>
+    <div class="form-box">
+      <form id="formPendaftaran">
+        <div class="form-group">
+          <label>Nama Lengkap</label>
+          <input type="text" id="namaSiswa" class="form-control" placeholder="Nama lengkap siswa" required>
+        </div>
+        <div class="form-group">
+          <label>Jenis Kelamin</label>
+          <select id="gender" class="form-control" required>
+            <option value="">Pilih Jenis Kelamin</option>
+            <option value="Laki-laki">Laki-laki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Usia</label>
+          <input type="number" id="usia" class="form-control" placeholder="Usia siswa" required>
+        </div>
+        <div class="form-group">
+          <label>Alamat</label>
+          <textarea id="alamat" class="form-control" placeholder="Alamat lengkap" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Asal Sekolah (TK/RA)</label>
+          <input type="text" id="asalSekolah" class="form-control" placeholder="Nama sekolah sebelumnya" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Daftar Sekarang</button>
+        <p id=" daftarStatus" style="text-align:center; margin-top:15px; font-weight:600; color:green;"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section class="contact-section" id="kontak">
+  <div class="container">
+    <h2 class="section-title">Kontak Kami</h2>
+    <p class="section-subtitle" style="color:rgba(255,255,255,0.8);">Hubungi kami untuk informasi lebih lanjut.</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <div>
+          <h4 style="color:var(--white);">Alamat</h4>
+          <p>Jl. Pendidikan No. 1, Air Abang, Indonesia</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-phone"></i>
+        <div>
+          <h4 style="color:var(--white);">Telepon</h4>
+          <p>+62 812 3456 7890</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-envelope"></i>
+        <div>
+          <h4 style="color:var(--white);">Email</h4>
+          <p>info@sd1airabang.sch.id</p>
+        </div>
+      </div>
+    </div>
+    <div class="form-box" style="max-width:700px;">
+      <h3 style="margin-bottom:20px; text-align:center;">Kirim Pesan</h3>
+      <form id="formPesan">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+          <div class="form-group">
+            <input type="text" id="namaPengirim" class="form-control" placeholder="Nama Anda" required>
+          </div>
+          <div class="form-group">
+            <input type="email" id="emailPengirim" class="form-control" placeholder="Email Anda" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea id="isiPesan" class="form-control" placeholder="Tulis pesan Anda..." rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Kirim Pesan</button>
+        <p id="pesanStatus" style="text-align:center; margin-top:15px; font-weight:600; color:green;"></p>
+      </form>
+    </div>
+    <div class="map-box" id="mapBox" style="margin-top:30px;">Lokasi Peta Google Maps</div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>&copy; 2024 SD 1 Air Abang. All rights reserved.</p>
+  </div>
+</footer>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2024 SD 1 Air Abang. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+// Load berita dari localStorage jika ada, fallback ke data dummy
+let beritaData = JSON.parse(localStorage.getItem('berita')) || [
+  { title: 'Juara Lomba Senam Geral', date: '15 Jan 2024', desc: 'Siswa SD 1 Air Abang berhasil menjuarai lomba senam geral tingkat kecamatan.', img: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efd?auto=format&fit=crop&w=400&q=80' },
+  { title: 'Perpisahan Kelas 6', date: '10 Jan 2024', desc: 'Perpisahan siswa kelas 6 tahun ajaran 2023/2024 berlangsung haru.', img: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=400&q=80' },
+  { title: 'Study Tour Jakarta', date: '05 Jan 2024', desc: 'Siswa melakukan study tour ke Museum Nasional dan Taman Mini.', img: 'https://images.unsplash.com/photo-1569025740933-007a13b2a979?auto=format&fit=crop&w=400&q=80' }
+];
+
+// Data dummy galeri
+const galeriData = [
+  'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=80',
+  'https://images.unsplash.com/photo-1580582932707-520aed75769d?auto=format&fit=crop&w=400&q=80',
+  'https://images.unsplash.com/photo-1497633762265-9d179a990a7f?auto=format&fit=crop&w=400&q=80',
+  'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400&q=80',
+  'https://images.unsplash.com/photo-1577896331232-7f113c977c53?auto=format&fit=crop&w=400&q=80',
+  'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=80'
+];
+
+// Variabel array untuk menyimpan data
+let daftarSiswa = JSON.parse(localStorage.getItem('daftarSiswa')) || [];
+let daftarPesan = JSON.parse(localStorage.getItem('daftarPesan')) || [];
+
+// Load berita
+const beritaContainer = document.getElementById('beritaContainer');
+function renderBeritaCards() {
+  if (!beritaContainer) return;
+  beritaContainer.innerHTML = '';
+  beritaData.forEach(b => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-img" style="background-image: url('${b.img || 'https://via.placeholder.com/800x400?text=No+Image'}'); height:200px;"></div>
+      <div class="card-body">
+        <span class="card-date">${b.date}</span>
+        <h3>${b.title}</h3>
+        <p style="margin-top:10px; color:var(--text-light);">${b.desc}</p>
+      </div>
+    `;
+    beritaContainer.appendChild(card);
+  });
+}
+renderBeritaCards();
+
+// Load fasilitas dari localStorage
+const fasilitasData = JSON.parse(localStorage.getItem("fasilitas")) || [];
+console.log(fasilitasData);
+const fasilitasContainer = document.getElementById("fasilitasContainer");
+
+if (fasilitasContainer) {
+
+  fasilitasContainer.innerHTML = "";
+
+  fasilitasData.forEach(f => {
+
+    fasilitasContainer.innerHTML += `
+      <div class="facility-item">
+        <img src="${f.img}" alt="${f.nama}">
+        <div class="facility-content">
+          <h3>${f.nama}</h3>
+          <p>${f.desc}</p>
+        </div>
+      </div>
+    `;
+
+  });
+
+}
+
+// Load galeri
+const galeriContainer = document.getElementById('galeriContainer');
+const galeriFromStore = JSON.parse(localStorage.getItem('galeri')) || galeriData;
+if (galeriContainer) {
+  galeriFromStore.forEach(g => {
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+    item.innerHTML = `
+      <img src="${g}" alt="Galeri">
+      <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+    `;
+    galeriContainer.appendChild(item);
+  });
+}
+
+// Render map dari konfigurasi siteConfig
+const mapBox = document.getElementById('mapBox');
+const siteConfig = JSON.parse(localStorage.getItem('siteConfig')) || {};
+if(mapBox) {
+  if(siteConfig.mapEmbed) {
+    mapBox.innerHTML = siteConfig.mapEmbed;
+  } else {
+    mapBox.innerHTML = '<div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:var(--primary);">Lokasi Peta Google Maps</div>';
+  }
+}
+
+// Toggle menu mobile
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+menuToggle.addEventListener('click', () => {
+  navMenu.classList.toggle('show');
+});
+
+// Header scroll effect
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('header');
+  if(window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+// Modal Login
+const loginModal = document.getElementById('loginModal');
+const btnLoginHeader = document.getElementById('btnLoginHeader');
+const closeLoginModal = document.getElementById('closeLoginModal');
+
+btnLoginHeader.addEventListener('click', () => {
+  loginModal.classList.add('active');
+});
+
+closeLoginModal.addEventListener('click', () => {
+  loginModal.classList.remove('active');
+});
+
+// Form Login
+const formLogin = document.getElementById('formLogin');
+formLogin.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const user = document.getElementById('username').value;
+  const pass = document.getElementById('password').value;
+  const msg = document.getElementById('loginMsg');
+  
+  if(user === 'admin' && pass === '1234') {
+    localStorage.setItem('loginAdmin', 'true');
+    loginModal.classList.remove('active');
+    window.location.href = 'dashboard.html';
+  } else {
+    msg.innerText = 'Username atau password salah!';
+  }
+});
+
+// Form Pendaftaran
+const formPendaftaran = document.getElementById('formPendaftaran');
+formPendaftaran.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const data = {
+    nama: document.getElementById('namaSiswa').value,
+    gender: document.getElementById('gender').value,
+    usia: document.getElementById('usia').value,
+    alamat: document.getElementById('alamat').value,
+    asalSekolah: document.getElementById('asalSekolah').value
+  };
+  
+  daftarSiswa.push(data);
+  localStorage.setItem('daftarSiswa', JSON.stringify(daftarSiswa));
+  
+  document.getElementById('daftarStatus').innerText = 'Pendaftaran berhasil! Terima kasih.';
+  formPendaftaran.reset();
+  renderTabelSiswa();
+});
+
+// Form Pesan
+const formPesan = document.getElementById('formPesan');
+formPesan.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const data = {
+    nama: document.getElementById('namaPengirim').value,
+    email: document.getElementById('emailPengirim').value,
+    isi: document.getElementById('isiPesan').value
+  };
+  
+  daftarPesan.push(data);
+  localStorage.setItem('daftarPesan', JSON.stringify(daftarPesan));
+  
+  document.getElementById('pesanStatus').innerText = 'Pesan terkirim! Terima kasih.';
+  formPesan.reset();
+  renderTabelPesan();
+});
+</script>
+
+</body>
+</html>
